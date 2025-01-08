@@ -4,9 +4,9 @@
 2. At the top level of the repository, add: private key and order type files in .pem extension
     - ordertype_cert.pem
     - private_key.pem
-    - wwwrd.pem
+    - wwrd.pem
 3. At the top level of the repository, add the order you want to sign in a folder called "order"
-4. Execute "./generate_signed_order.sh"
+4. Execute `./generate_signed_order.sh`
 
 ## How to verify the signature
 
