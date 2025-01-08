@@ -27,6 +27,21 @@ func main() {
 		log.Fatalf("Failed to read file to sign: %v", err)
 	}
 
+	wwdrCertFile := "./wwdr.pem"
+
+	wwdrCertPEM, err := os.ReadFile(wwdrCertFile)
+	if err != nil {
+		log.Fatalf("Failed to read WWDR certificate file: %v", err)
+	}
+	wwdrCertBlock, _ := pem.Decode(wwdrCertPEM)
+	if wwdrCertBlock == nil || wwdrCertBlock.Type != "CERTIFICATE" {
+		log.Fatalf("Failed to decode WWDR certificate PEM")
+	}
+	wwdrCertificate, err := x509.ParseCertificate(wwdrCertBlock.Bytes)
+	if err != nil {
+		log.Fatalf("Failed to parse WWDR certificate: %v", err)
+	}
+
 	// Load the certificate
 	certPEM, err := os.ReadFile(certFile)
 	if err != nil {
@@ -65,7 +80,11 @@ func main() {
 		log.Fatalf("Failed to create signed data: %v", err)
 	}
 
+	// Add certificates
+	signedData.AddCertificate(wwdrCertificate)
+
 	err = signedData.AddSigner(cert, privateKey, pkcs7.SignerInfoConfig{})
+
 	if err != nil {
 		log.Fatalf("Failed to add signer: %v", err)
 	}
@@ -84,5 +103,5 @@ func main() {
 		log.Fatalf("Failed to write signature file: %v", err)
 	}
 
-	fmt.Println("Signature generated successfully.")
+	fmt.Println("Signature generated successfully with signing date.")
 }
