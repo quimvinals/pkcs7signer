@@ -28,7 +28,6 @@ func main() {
 	}
 
 	wwdrCertFile := "./wwdr.pem"
-
 	wwdrCertPEM, err := os.ReadFile(wwdrCertFile)
 	if err != nil {
 		log.Fatalf("Failed to read WWDR certificate file: %v", err)
@@ -80,6 +79,9 @@ func main() {
 		log.Fatalf("Failed to create signed data: %v", err)
 	}
 
+	signedData.SetEncryptionAlgorithm(pkcs7.OIDDigestAlgorithmSHA256)
+	signedData.SetDigestAlgorithm(pkcs7.OIDDigestAlgorithmSHA256)
+
 	// Add certificates
 	signedData.AddCertificate(wwdrCertificate)
 
@@ -103,5 +105,5 @@ func main() {
 		log.Fatalf("Failed to write signature file: %v", err)
 	}
 
-	fmt.Println("Signature generated successfully with signing date.")
+	fmt.Println("Signature generated successfully with SHA-256.")
 }

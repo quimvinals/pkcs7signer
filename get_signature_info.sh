@@ -1,0 +1,1 @@
+openssl pkcs7 -in order/signature -inform DER -print -text > signature_info.txt

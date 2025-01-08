@@ -5,3 +5,7 @@ order/signature
 .DS_Store
 signature
 signature.cert
+signature_info.txt
+*.cert
+*.pem
+*.txt
