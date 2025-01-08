@@ -3,3 +3,5 @@ private_key.pem
 order/manifest.json
 order/signature
 .DS_Store
+signature
+signature.cert
