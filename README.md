@@ -1,6 +1,6 @@
 ## Ho to create a signed order
 
-1. Install Golang > 1.23
+1. [Install Golang](https://go.dev/doc/install) > 1.23
 2. At the top level of the repository, add: private key and order type files in .pem extension
     - ordertype_cert.pem
     - private_key.pem
