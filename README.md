@@ -6,3 +6,7 @@
     - private_key.pem
 3. At the top level of the repository, add the order you want to sign in a folder called "order"
 4. Execute "./generate_signed_order.sh"
+
+## How to verify the signature
+
+Execute ./verify_signature.sh
